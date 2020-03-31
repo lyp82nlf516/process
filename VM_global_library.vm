@@ -1,0 +1,124 @@
+#macro( rows $form )
+	#foreach($obj in $form)
+		#set($index = ${velocityCount} % 4)
+		#if($obj.id == 41)
+			<input type="hidden" name="$!obj.name" value="$!obj.defaultVal">
+		#else
+			#if($index == 1)
+				<div class="form-group">
+			#end
+			<div class="col-md-3">
+				<label class="col-sm-4 control-label">$obj.title:</label>
+				<div class="col-sm-7">
+					#if($obj.id == 31)
+						<input type="text" class="form-control" name="$!obj.name" placeholder="请输入$!obj.title">
+					#elseif($obj.id == 21)
+						<select data-placeholder="请选择$!obj.title" class="query-chonse-select" name="$!obj.name" joinName="$!obj.joinName" backJoinName="$!obj.backJoinName">
+	                    	#if($!obj.values)
+		                    	#foreach($value in $!obj.values)
+		                    	<option value="$!value.key">$!value.value</option>
+		                    	#end
+	                    	#end
+	                    </select>
+                    #elseif($obj.id == 23)
+						<select data-placeholder="请选择$!obj.title" class ="form-control" id="$!obj.levelId" name="$!obj.name">
+	                    	#if($!obj.values)
+		                    	#foreach($value in $!obj.values)
+		                    		#if($!value.pValue)
+		                    			<option value="$!value.key" data-chained="$!value.pValue">$value.value</option>
+		                    		#else
+		                    			<option value="$!value.key">$!value.value</option>
+		                    		#end
+		                    	#end
+	                    	#end
+	                    </select>
+                    #elseif($obj.id == 11)
+                    	<input id="$!obj.name" name="$!obj.name" class="laydate-icon form-control layer-date">
+                    #elseif($obj.id == 12)
+                    	<input id="$!obj.name" name="$!obj.name" class="laydate-icon form-control layer-date">
+                	#elseif($obj.id == 13)
+                		<input id="$!obj.name" name="$!obj.name" class="laydate-icon form-control year-month">
+					#end
+				</div>
+			</div>
+			#if($index == 0 && $velocityCount == $form.size())
+				</div>
+				<div class="form-group">
+					<div class="col-md-11">
+					</div>
+					<div class="col-md-1">
+						<div class="col-sm-9">
+							<button id="search" style="float: right;" type="button" class="btn btn-success">&nbsp;&nbsp;查&nbsp;&nbsp;询&nbsp;&nbsp;</button>
+						</div>
+					</div>
+				</div>
+			#elseif($index > 0 && $velocityCount == $form.size())	
+				#if($index == 1)
+					<div class="col-md-8">
+					</div>
+					<div class="col-md-1">
+						<div class="col-sm-9">
+							<button id="search" style="float: right;" type="button" class="btn btn-success">&nbsp;&nbsp;查&nbsp;&nbsp;询&nbsp;&nbsp;</button>
+						</div>
+					</div>
+				#elseif($index == 2)
+					<div class="col-md-5">
+					</div>
+					<div class="col-md-1">
+						<div class="col-sm-9">
+							<button id="search" style="float: right;" type="button" class="btn btn-success">&nbsp;&nbsp;查&nbsp;&nbsp;询&nbsp;&nbsp;</button>
+						</div>
+					</div>
+				#else
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-1">
+						<div class="col-sm-9">
+							<button id="search" style="float: right;" type="button" class="btn btn-success">&nbsp;&nbsp;查&nbsp;&nbsp;询&nbsp;&nbsp;</button>
+						</div>
+					</div>
+				#end
+				</div>
+			#elseif($index == 0)	
+				</div>
+			#end
+		#end
+	#end
+#end
+
+#macro( query $form )
+	#foreach($obj in $form)
+		#if($obj.code == "hiddeninput")
+		<input type="hidden" name="$!obj.name" value="$!obj.defaultVal">
+		#else
+		<div class="col-md-3">
+			<div class="form-group">
+				<label class="col-sm-4 control-label">$!obj.title:</label>
+				<div class="col-sm-7">
+					#if($obj.code == "input")
+					<input type="text" class="form-control" name="$!obj.name" placeholder="请输入$!obj.title">
+					#elseif($obj.code == "select")
+					<select data-placeholder="请选择$!obj.title" class="query-chonse-select" name="$!obj.name">
+                    	#if($!obj.values)
+	                    	#foreach($value in $!obj.values)
+	                    	<option value="$!value.key">$!value.value</option>
+	                    	#end
+                    	#end
+                    </select>
+                    #elseif($obj.code == "date")
+                    	#if($obj.name == "yearmonth")
+                    		<input id="$!obj.name" name="$!obj.name" class="wholewh form-control Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM',readOnly:true})" readonly/>
+                    	#elseif($obj.name == "year")
+                    		<input id="$!obj.name" name="$!obj.name" class="wholewh form-control Wdate" onfocus="WdatePicker({dateFmt:'yyyy',readOnly:true})" readonly/>
+                    	#else
+                    		<input id="$!obj.name" name="$!obj.name" class="wholewh form-control Wdate needinit" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" readonly/>
+                    	#end
+                    #elseif($obj.code == "checkbox")
+                    <input id="$!obj.name" name="$!obj.name" class="laydate-icon form-control layer-date">
+					#end
+				</div>
+			</div>
+		</div>
+		#end
+	#end
+#end
