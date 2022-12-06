@@ -18,7 +18,7 @@
     "draggabilly": "^2.2.0",
     "element-ui": "^1.4.13",
     "jquery": "^3.2.1",
-    "qs": "^6.5.0",
+    "qs": "^6.5.3",
     "sorttable": "^1.0.2",
     "stylus-loader": "^3.0.1",
     "vue": "^2.2.2",
